@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Hero from './components/hero'
 import Menu from './components/menu'
 import Parmeters from './components/parameters'
-import ResultsDisplay from './components/results'
 import './App.css'
 
 function App() {
