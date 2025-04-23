@@ -23,7 +23,6 @@ export default function ResultsDisplay({ resultData }) {
       try {
         console.log("Procesando solución:", resultData.solution);
         const classification = resultData.classification || '';
-        // Verificamos si la solución contiene constantes sin asignar
         const hasUnassignedConstants = /C[1-2]|c[1-2]/.test(resultData.solution);
         
         if (hasUnassignedConstants) {
@@ -40,18 +39,15 @@ export default function ResultsDisplay({ resultData }) {
         setParseError("No se pudo analizar la solución para generar la gráfica: " + err.message);
       }
     } else {
-      // Generar datos de ejemplo para mostrar una gráfica por defecto
       const defaultData = generateDefaultGraphData();
       setGraphData(defaultData);
     }
   }, [resultData]);
   
   const generateDefaultGraphData = () => {
-    // Generar una gráfica de ejemplo para mostrar cuando no hay datos
     const xValues = [];
     const yValues = [];
     
-    // Generar una función subamortiguada como ejemplo
     for (let t = 0; t <= 20; t += 0.1) {
       xValues.push(t);
       yValues.push(Math.exp(-0.2 * t) * Math.cos(t));
@@ -85,11 +81,9 @@ export default function ResultsDisplay({ resultData }) {
     return { x: xValues, y: yValues };
   };
   
-  // Función auxiliar para convertir fracciones LaTeX a valores decimales
   const parseFraction = (fractionStr) => {
     if (!fractionStr) return 1;
     
-    // Procesamos fracciones como \frac{a}{b}
     const fracMatch = fractionStr.match(/\\frac\{([^{}]+)\}\{([^{}]+)\}/);
     if (fracMatch) {
       const numerator = parseFloat(fracMatch[1].replace(/[^0-9.-]/g, ''));
@@ -99,7 +93,6 @@ export default function ResultsDisplay({ resultData }) {
       }
     }
     
-    // Si no es una fracción, intentamos parsearlo como número
     return parseFloat(fractionStr.replace(/[^0-9.-]/g, '')) || 1;
   };
   
@@ -108,34 +101,26 @@ export default function ResultsDisplay({ resultData }) {
     const hasC1 = /C_?1|c_?1/.test(latexStr);
     const hasC2 = /C_?2|c_?2/.test(latexStr);
     
-    // Si tenemos constantes sin asignar, usamos valores predeterminados
     const defaultC1 = 1;
     const defaultC2 = 1;
     
     try {
-      // Casos específicos para diferentes clasificaciones
       if (classification && classification.includes("subamortiguado_forzado")) {
-        // Caso específico para el formato de la API
-        // Formato: constante + coef * e^{-alpha*t} * sin(omega*t)
         
-        // Buscamos la constante al inicio
         const constantMatch = latexStr.match(/^([+-]?\s*\d*\.?\d*)/);
         const constant = constantMatch ? parseFloat(constantMatch[1]) || 0 : 0;
         
-        // Buscamos el coeficiente del seno
         const coefMatch = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*e\^/);
         const coef = coefMatch ? parseFloat(coefMatch[1]) || 1 : 1;
         
-        // Buscamos el factor de amortiguamiento (en el exponente)
         const expMatch = latexStr.match(/e\^\{\s*-\s*([^{}]+)\s*\}/);
-        let alpha = 0.5; // valor por defecto
+        let alpha = 0.5; 
         if (expMatch) {
           alpha = parseFraction(expMatch[1]);
         }
         
-        // Buscamos la frecuencia (en el seno)
         const sinMatch = latexStr.match(/\\sin\{\\left\(\s*([^{}]+)\s*\\right\)\}/);
-        let omega = 1; // valor por defecto
+        let omega = 1;
         if (sinMatch) {
           omega = parseFraction(sinMatch[1]);
         }
@@ -148,7 +133,6 @@ export default function ResultsDisplay({ resultData }) {
       } else if (classification && classification.includes("criticamente_amortiguado")) {
         // Código para sistema críticamente amortiguado
         return (t) => {
-          // Mejoramos la expresión regular para ser más flexible
           const match = latexStr.match(/\\left\(\s*([+-]?\d*\.?\d*)\s*t\s*[+-]\s*([+-]?\d*\.?\d*)\\right\)\s*e\^\{\s*-\s*([+-]?\d*\.?\d*)\s*t\s*\}/);
           
           if (match) {
@@ -159,13 +143,11 @@ export default function ResultsDisplay({ resultData }) {
             return (c1 + c2 * t) * Math.exp(-dampRate * t);
           }
           
-          // Si no hay match, usamos valores por defecto
           return (defaultC1 + defaultC2 * t) * Math.exp(-t);
         };
       } else if (classification && classification.includes("subamortiguado")) {
         // Código para sistema subamortiguado sin forzamiento
         return (t) => {
-          // Mejorar las expresiones regulares para ser más flexibles
           const expMatch = latexStr.match(/e\^\{\s*-\s*([+-]?\d*\.?\d*)\s*t\s*\}/);
           const sinMatch = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*\\sin\(\s*([+-]?\d*\.?\d*)\s*t\s*\)/);
           const cosMatch = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*\\cos\(\s*([+-]?\d*\.?\d*)\s*t\s*\)/);
@@ -178,9 +160,7 @@ export default function ResultsDisplay({ resultData }) {
           return Math.exp(-alpha * t) * (sinCoef * Math.sin(omega * t) + cosCoef * Math.cos(omega * t));
         };
       } else if (classification && classification.includes("sobreamortiguado")) {
-        // Código para sistema sobreamortiguado
         return (t) => {
-          // Mejorar las expresiones regulares para ser más flexibles
           const terms = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*e\^\{\s*-\s*([+-]?\d*\.?\d*)\s*t\s*\}/g) || [];
           
           let c1 = hasC1 ? defaultC1 : 1;
@@ -207,7 +187,6 @@ export default function ResultsDisplay({ resultData }) {
           return c1 * Math.exp(-r1 * t) + c2 * Math.exp(-r2 * t);
         };
       } else {
-        // Caso no amortiguado (oscilatorio)
         return (t) => {
           const sinMatch = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*\\sin\(\s*([+-]?\d*\.?\d*)\s*t\s*\)/);
           const cosMatch = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*\\cos\(\s*([+-]?\d*\.?\d*)\s*t\s*\)/);
@@ -221,7 +200,6 @@ export default function ResultsDisplay({ resultData }) {
       }
     } catch (error) {
       console.error("Error creating function from LaTeX:", error);
-      // En caso de error, devolvemos una función por defecto
       return (t) => Math.cos(t);
     }
   };
