@@ -4,12 +4,23 @@ import Plot from 'react-plotly.js';
 import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const mathJaxConfig = {
+  loader: { load: ["input/tex", "output/svg"] },
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,      
+    processEnvironments: true  
   },
   svg: {
-    fontCache: 'global'
+    fontCache: 'global',
+    scale: 1,                  
+    minScale: 0.5,             
+    mtextInheritFont: false,   
+    merrorInheritFont: true,  
+    mathmlSpacing: false       
+  },
+  startup: {
+    typeset: true              
   }
 };
 
@@ -19,6 +30,11 @@ export default function ResultsDisplay({ resultData }) {
   const [usingDefaultConstants, setUsingDefaultConstants] = useState(false);
   
   useEffect(() => {
+
+    if (window.MathJax) {
+      window.MathJax.typesetPromise && window.MathJax.typesetPromise();
+    }
+
     if (resultData && resultData.solution) {
       try {
         console.log("Procesando solución:", resultData.solution);
