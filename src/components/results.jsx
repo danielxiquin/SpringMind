@@ -30,7 +30,6 @@ export default function ResultsDisplay({ resultData }) {
   const [usingDefaultConstants, setUsingDefaultConstants] = useState(false);
   
   useEffect(() => {
-
     if (window.MathJax) {
       window.MathJax.typesetPromise && window.MathJax.typesetPromise();
     }
@@ -60,6 +59,7 @@ export default function ResultsDisplay({ resultData }) {
     }
   }, [resultData]);
   
+  // Resto de funciones de procesamiento (sin cambios)
   const generateDefaultGraphData = () => {
     const xValues = [];
     const yValues = [];
@@ -208,7 +208,7 @@ export default function ResultsDisplay({ resultData }) {
           const cosMatch = latexStr.match(/([+-]?\s*\d*\.?\d*)\s*\\cos\(\s*([+-]?\d*\.?\d*)\s*t\s*\)/);
           
           const sinCoef = hasC1 ? defaultC1 : (sinMatch ? parseFloat(sinMatch[1]) || 0 : 0);
-          const cosCoef = hasC2 ? defaultC2 : (cosMatch ? parseFloat(cosMatch[1]) || 1 : 1);
+          const cosCoef = hasC2 ? defaultC2 : (cosMatch ? parseFloat(cosMatch[1]) || 0 : 1);
           const omega = (sinMatch && parseFloat(sinMatch[2])) || (cosMatch && parseFloat(cosMatch[2])) || 1;
           
           return sinCoef * Math.sin(omega * t) + cosCoef * Math.cos(omega * t);
@@ -222,83 +222,119 @@ export default function ResultsDisplay({ resultData }) {
   
   return (
     <MathJaxContext config={mathJaxConfig}>
-      <div className="bg-white p-8 rounded-md shadow-md mt-8">
-        <h2 className="text-2xl font-bold mb-4">Resultados del Sistema Masa-Resorte</h2>
-        
+      {/* Contenedor principal con estilo oscuro */}
+      <div className="bg-[#242021] p-8 flex flex-col items-center">
         <div className="mb-6">
-          <h3 className="text-xl font-semibold">Clasificación del Sistema</h3>
-          <p className="text-lg capitalize">
-            {resultData && resultData.classification 
-              ? resultData.classification.replace(/_/g, ' ') 
-              : "Sin datos aún"}
-          </p>
+          <h2 className="text-3xl font-bold text-white">
+            Resultados del Sistema Masa-Resorte
+          </h2>
+          <p className="text-[#cccccc] text-center mt-2">Análisis y visualización de la dinámica del sistema</p>
         </div>
         
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold">Ecuación Diferencial</h3>
-          <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-            <MathJax>
-              {resultData && resultData.equation 
-                ? "$" + resultData.equation + "$" 
-                : "$m\\frac{d^2x}{dt^2} + c\\frac{dx}{dt} + kx = F(t)$"}
-            </MathJax>
+        {/* Grid para las tarjetas */}
+        <div className="w-full max-w-6xl grid grid-cols-5 gap-6">
+          {/* Tarjeta 1: Ecuación Diferencial */}
+          <div className="rounded-xl col-span-2 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
+            {/* Barra de color superior */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
+            
+            <h3 className="text-xl font-semibold text-[#9b702c] mb-3">Ecuación Diferencial</h3>
+            <div className="bg-[#1e1e1e] p-4 rounded-lg w-full overflow-x-auto">
+              <MathJax className="text-white">
+                {resultData && resultData.equation 
+                  ? "$" + resultData.equation + "$" 
+                  : "$m\\frac{d^2x}{dt^2} + c\\frac{dx}{dt} + kx = F(t)$"}
+              </MathJax>
+            </div>
           </div>
-        </div>
-        
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold">Solución</h3>
-          <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-            <MathJax>
-              {resultData && resultData.solution 
-                ? "$x(t) = " + resultData.solution + "$" 
-                : "$x(t) = $ [La solución aparecerá aquí]"}
-            </MathJax>
+
+          {/* Tarjeta 2: Solución */}
+          <div className="rounded-xl col-span-3 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
+            {/* Barra de color superior */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
+            
+            <h3 className="text-xl font-semibold text-[#9b702c] mb-3">Solución</h3>
+            <div className="bg-[#1e1e1e] p-4 rounded-lg w-full overflow-x-auto">
+              <MathJax className="text-white">
+                {resultData && resultData.solution 
+                  ? "$x(t) = " + resultData.solution + "$" 
+                  : "$x(t) = $ [La solución aparecerá aquí]"}
+              </MathJax>
+            </div>
           </div>
-        </div>
-        
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Gráfica de la Posición vs. Tiempo</h3>
-          {parseError ? (
-            <div className="text-red-500">{parseError}</div>
-          ) : (
-            <>
-              {usingDefaultConstants && (
-                <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4">
-                  <p className="font-semibold">Nota:</p>
-                  <p>Esta gráfica es una representación aproximada usando valores predeterminados (C₁=1, C₂=1) 
-                  ya que la solución contiene constantes sin valores específicos. La gráfica real puede variar 
-                  dependiendo de las condiciones iniciales.</p>
+
+          {/* Tarjeta 3: Gráfica */}
+          <div className="rounded-xl col-span-3 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
+            {/* Barra de color superior */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
+            
+            <h3 className="text-xl font-semibold text-[#9b702c] mb-3">Gráfica de la Posición vs. Tiempo</h3>
+            
+            {parseError ? (
+              <div className="text-red-400">{parseError}</div>
+            ) : (
+              <>
+                {usingDefaultConstants && (
+                  <div className="bg-[#1e1e1e] border-l-4 border-[#9b702c] p-4 mb-4 text-[#cccccc] text-sm">
+                    <p className="font-semibold text-[#9b702c]">Nota:</p>
+                    <p>Esta gráfica usa valores predeterminados (C₁=1, C₂=1) 
+                    ya que la solución contiene constantes sin valores específicos.</p>
+                  </div>
+                )}
+                <div className="h-64 w-full">
+                  <Plot
+                    data={[
+                      {
+                        x: graphData.x,
+                        y: graphData.y,
+                        type: 'scatter',
+                        mode: 'lines',
+                        name: 'Posición',
+                        line: { color: '#9b702c' }
+                      }
+                    ]}
+                    layout={{
+                      title: {
+                        text: resultData ? 'Respuesta del Sistema' : 'Gráfica de Ejemplo',
+                        font: { color: '#ffffff' }
+                      },
+                      paper_bgcolor: 'rgba(30, 30, 30, 0.8)',
+                      plot_bgcolor: 'rgba(26, 26, 26, 0.5)',
+                      xaxis: {
+                        title: 'Tiempo (s)',
+                        color: '#cccccc',
+                        gridcolor: '#444444'
+                      },
+                      yaxis: {
+                        title: 'Posición x(t)',
+                        color: '#cccccc',
+                        gridcolor: '#444444'
+                      },
+                      margin: { t: 40 },
+                      autosize: true,
+                      font: { color: '#ffffff' }
+                    }}
+                    style={{ width: '100%', height: '100%' }}
+                    useResizeHandler={true}
+                    config={{ responsive: true }}
+                  />
                 </div>
-              )}
-              <div className="h-96">
-                <Plot
-                  data={[
-                    {
-                      x: graphData.x,
-                      y: graphData.y,
-                      type: 'scatter',
-                      mode: 'lines',
-                      name: 'Posición',
-                      line: { color: '#3B82F6' }
-                    }
-                  ]}
-                  layout={{
-                    title: resultData ? 'Respuesta del Sistema' : 'Gráfica de Ejemplo',
-                    xaxis: {
-                      title: 'Tiempo (s)'
-                    },
-                    yaxis: {
-                      title: 'Posición x(t)'
-                    },
-                    margin: { t: 40 },
-                    autosize: true
-                  }}
-                  style={{ width: '100%', height: '100%' }}
-                  useResizeHandler={true}
-                />
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
+
+          {/* Tarjeta 4: Clasificación */}
+          <div className="rounded-xl col-span-2 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
+            {/* Barra de color superior */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
+            
+            <h3 className="text-xl font-semibold text-[#9b702c] mb-3">Clasificación del Sistema</h3>
+            <p className="text-lg text-white capitalize">
+              {resultData && resultData.classification 
+                ? resultData.classification.replace(/_/g, ' ') 
+                : "Sin datos aún"}
+            </p>
+          </div>
         </div>
       </div>
     </MathJaxContext>

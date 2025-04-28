@@ -17,6 +17,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-plotly.js": "^2.6.0",
+    "swapy": "^1.0.5",
     "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
