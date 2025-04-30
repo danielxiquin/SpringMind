@@ -91,10 +91,10 @@ export default function Parameters(props) {
   }
 
   return (
-    <section className="bg-gradient-to-b from-[#f1f1f1] to-[#242021] min-h-screen p-6 flex flex-col justify-center gap-10">
+    <section className="bg-[#242021] min-h-screen p-6 flex flex-col justify-center gap-10">
       <div className="text-center flex flex-col mb-4">
-        <h1 className="text-6xl font-bold text-[#242021]">INICIA</h1>
-        <p className="text-xl text-[#333333] mt-2">Simula el comportamiento de un sistema masa-resorte-amortiguador</p>
+        <h1 className="text-6xl font-bold text-[#f1f1f1]">INICIA</h1>
+        <p className="text-xl text-[#f1f1f1] mt-2">Simula el comportamiento de un sistema masa-resorte-amortiguador</p>
       </div>
 
       <div className="w-full max-w-4xl mx-auto">
@@ -105,8 +105,8 @@ export default function Parameters(props) {
               onClick={() => setActiveTab('FISICOS')}
               className={`px-6 min-w-xs py-4 text-center font-medium transition-colors ${
                 activeTab === 'FISICOS'
-                  ? 'bg-white text-[#242021] border-t-2 border-[#9b702c]'
-                  : 'bg-gray-400 text-white'
+                  ? 'bg-[#333333] text-[#f1f1f1] border-t-2 border-[#9b702c]'
+                  : 'bg-gray-700 text-white'
               } rounded-t-md`}
             >
               PARÁMETROS FÍSICOS
@@ -115,22 +115,22 @@ export default function Parameters(props) {
               onClick={() => setActiveTab('NORM')}
               className={`px-6 min-w-xs py-2 text-center font-medium transition-colors ${
                 activeTab === 'NORM'
-                  ? 'bg-white text-[#242021] border-t-2 border-[#9b702c]'
-                  : 'bg-gray-400 text-white'
+                  ? 'bg-[#333333] text-[#f1f1f1] border-t-2 border-[#9b702c]'
+                  : 'bg-gray-700 text-white'
               } rounded-t-md`}
             >
               PARÁMETROS <br /> NORMALIZADOS
             </button>
           </div>
 
-          {/* Tab Content */}
-          <div className="bg-white p-8 w-full rounded-md shadow-lg border border-[#d9d9d9]">
+          {/* Tab Content */}                                                                     
+          <div className="bg-[#333333] p-8 w-full rounded-md shadow-lg">
             {activeTab === 'FISICOS' && (
               <div>
                 {/* Header */}
                 <div className="flex flex-col justify-between items-start mb-8 gap-2">
                   <div className="text-right">
-                    <p className="text-gray-600 mt-1 text-base text-justify">
+                    <p className="text-[#f1f1f1] mt-1 text-base text-justify">
                       Ingresa los valores reales de tu sistema: masa, constante del resorte, amortiguamiento y fuerza externa. 
                       Ideal si estás resolviendo un problema con unidades físicas concretas.
                     </p>
@@ -143,69 +143,69 @@ export default function Parameters(props) {
                     <form className="space-y-3 flex flex-col gap-4 items-center" onSubmit={handleSubmitFisic}>
                       <div className="space-y-3 w-full grid grid-cols-2 gap-4">
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Masa (m)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Masa (m)</label>
                           <input
                             type="text"
                             name="mass"
                             value={formFisc.mass}
                             onChange={handleChangeFisicos}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Constante (k)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Constante (k)</label>
                           <input
                             type="text"
                             name="stiffness"
                             value={formFisc.stiffness}
                             onChange={handleChangeFisicos}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">C amortiguamiento (B)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">C amortiguamiento (B)</label>
                           <input
                             type="text"
                             name="damping"
                             value={formFisc.damping}
                             onChange={handleChangeFisicos}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Fuerza externa F(t)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Fuerza externa F(t)</label>
                           <input
                             type="text"
                             name="force"
                             value={formFisc.force}
                             onChange={handleChangeFisicos}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Posición x(0)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Posición x(0)</label>
                           <input
                             type="text"
                             name="initial_position"
                             value={formFisc.initial_position}
                             onChange={handleChangeFisicos}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Velocidad x'(0)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Velocidad x'(0)</label>
                           <input
                             type="text"
                             name="initial_velocity"
                             value={formFisc.initial_velocity}
                             onChange={handleChangeFisicos}
                             placeholder=""
-                            className="w-full h-10 p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full h-10 p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                       </div>
@@ -228,7 +228,7 @@ export default function Parameters(props) {
                 {/* Header */}
                 <div className="flex flex-col gap-2 justify-between items-start mb-8">
                   <div className="text-right">
-                    <p className="text-gray-600 mt-1 text-base text-justify">
+                    <p className="text-[#f1f1f1] mt-1 text-base text-justify">
                       Trabaja con el sistema en su forma reducida: solo necesitas el factor de amortiguamiento β, 
                       la frecuencia natural ω₀ y la fuerza externa dividida entre la masa. Ideal para análisis teóricos o simulaciones.
                     </p>
@@ -241,58 +241,58 @@ export default function Parameters(props) {
                     <form className="space-y-3 flex flex-col gap-4 items-center" onSubmit={handleSubmitNorm}>
                       <div className="space-y-3 w-full grid grid-cols-2 gap-4">
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Amortiguamiento (β)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Amortiguamiento (β)</label>
                           <input
                             type="text"
                             name="beta"
                             value={formNorm.beta}
                             onChange={handleChangeNorm}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Frecuencia Natural (ω₀)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Frecuencia Natural (ω₀)</label>
                           <input
                             type="text"
                             name="omega_sq"
                             value={formNorm.omega_sq}
                             onChange={handleChangeNorm}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Fuerza externa F(t)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Fuerza externa F(t)</label>
                           <input
                             type="text"
                             name="force"
                             value={formNorm.force}
                             onChange={handleChangeNorm}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Posición x(0)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Posición x(0)</label>
                           <input
                             type="text"
                             name="initial_position"
                             value={formNorm.initial_position}
                             onChange={handleChangeNorm}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-gray-700">Velocidad x'(0)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Velocidad x'(0)</label>
                           <input
                             type="text"
                             name="initial_velocity"
-                            value={formNorm.initial_velocity}
+                            value={formNorm.initial_velocity}                                               
                             onChange={handleChangeNorm}
                             placeholder=""
-                            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#9b702c] focus:border-[#9b702c]"
+                            className="w-full p-2 bg-[#1e1e1e] rounded-md outline-none text-[#f1f1f1]"
                           />
                         </div>
                       </div>

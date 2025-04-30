@@ -239,7 +239,7 @@ export default function ResultsDisplay({ resultData }) {
             <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
             
             <h3 className="text-xl font-semibold text-[#9b702c] mb-3">Ecuación Diferencial</h3>
-            <div className="bg-[#1e1e1e] p-4 rounded-lg w-full overflow-x-auto">
+            <div className="bg-[#1e1e1e] p-4 rounded-lg w-full overflow-x-hidden flex justify-center">
               <MathJax className="text-white">
                 {resultData && resultData.equation 
                   ? "$" + resultData.equation + "$" 
@@ -247,14 +247,14 @@ export default function ResultsDisplay({ resultData }) {
               </MathJax>
             </div>
           </div>
-
-          {/* Tarjeta 2: Solución */}
-          <div className="rounded-xl col-span-3 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
+          
+          {/* Tarjeta 2: Solución */}             
+          <div className="rounded-xl col-span-3 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md ">
             {/* Barra de color superior */}
             <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
             
             <h3 className="text-xl font-semibold text-[#9b702c] mb-3">Solución</h3>
-            <div className="bg-[#1e1e1e] p-4 rounded-lg w-full overflow-x-auto">
+            <div className="bg-[#1e1e1e] p-4 rounded-lg w-full overflow-x-auto overflow-x-hidden flex justify-center" >
               <MathJax className="text-white">
                 {resultData && resultData.solution 
                   ? "$x(t) = " + resultData.solution + "$" 
