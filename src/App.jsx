@@ -3,6 +3,7 @@ import Hero from './components/hero'
 import Menu from './components/menu'
 import Parmeters from './components/parameters'
 import ResultsDisplay from './components/results'
+import FinalFooter from './components/final'
 import './App.css'
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
       </div>
       <div>
         <ResultsDisplay resultData={resultData}/>
+      </div>
+      <div>
+        <FinalFooter/>
       </div>
     </>
     
