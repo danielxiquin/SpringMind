@@ -232,9 +232,9 @@ export default function ResultsDisplay({ resultData }) {
         </div>
         
         {/* Grid para las tarjetas */}
-        <div className="w-full max-w-6xl grid grid-cols-5 gap-6">
+        <div className="w-full max-w-6xl grid grid-cols-5 gap-6 max-md:flex max-md:flex-col">
           {/* Tarjeta 1: Ecuación Diferencial */}
-          <div className="rounded-xl col-span-2 border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
+          <div className="rounded-xl col-span-2  border border-[#444444] bg-[#333333] flex flex-col justify-center items-start gap-2 p-6 relative overflow-hidden shadow-md">
             {/* Barra de color superior */}
             <div className="absolute top-0 left-0 w-full h-1 bg-[#9b702c]"></div>
             

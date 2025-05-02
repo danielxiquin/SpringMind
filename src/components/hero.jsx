@@ -7,7 +7,7 @@ export default function Hero() {
       >
         <div className="container mx-auto flex justify-center items-center flex-grow">
           <div className="text-center">
-            <h1 className="text-[16em] text-[#f1f1f1] font-normal leading-[0.9] font-['Anton']">
+            <h1 className="lg:text-[16em] text-[#f1f1f1] font-normal leading-[0.9] font-['Anton'] min-sm:text-9xl max-sm:text-7xl ">
               SPRINGMIND
             </h1>                       
           </div>

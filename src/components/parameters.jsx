@@ -91,8 +91,8 @@ export default function Parameters(props) {
   }
 
   return (
-    <section className="bg-[#242021] min-h-screen p-6 flex flex-col justify-center gap-10">
-      <div className="text-center flex flex-col mb-4">
+    <section className="bg-[#242021]  p-6 flex flex-col justify-center gap-10">
+      <div className="text-center flex flex-col">
         <h1 className="text-6xl font-bold text-[#f1f1f1]">INICIA</h1>
         <p className="text-xl text-[#f1f1f1] mt-2">Simula el comportamiento de un sistema masa-resorte-amortiguador</p>
       </div>
@@ -103,7 +103,7 @@ export default function Parameters(props) {
           <div className="flex gap-1">
             <button
               onClick={() => setActiveTab('FISICOS')}
-              className={`px-6 min-w-xs py-4 text-center font-medium transition-colors ${
+              className={`px-6 min-w-xs py-4 text-center font-medium max-sm:text-sm max-sm:min-w-45 transition-colors ${
                 activeTab === 'FISICOS'
                   ? 'bg-[#333333] text-[#f1f1f1] border-t-2 border-[#9b702c]'
                   : 'bg-gray-700 text-white'
@@ -113,7 +113,7 @@ export default function Parameters(props) {
             </button>
             <button
               onClick={() => setActiveTab('NORM')}
-              className={`px-6 min-w-xs py-2 text-center font-medium transition-colors ${
+              className={`px-6 min-w-xs py-2 text-center font-medium max-sm:text-sm max-sm:min-w-48 transition-colors ${
                 activeTab === 'NORM'
                   ? 'bg-[#333333] text-[#f1f1f1] border-t-2 border-[#9b702c]'
                   : 'bg-gray-700 text-white'
@@ -141,7 +141,7 @@ export default function Parameters(props) {
                 <div className="w-full space-y-8 flex gap-20">
                   <div className="w-full">
                     <form className="space-y-3 flex flex-col gap-4 items-center" onSubmit={handleSubmitFisic}>
-                      <div className="space-y-3 w-full grid grid-cols-2 gap-4">
+                      <div className="space-y-3 w-full grid grid-cols-2 gap-4 max-sm:grid-cols-1">
                         <div className="flex gap-2">
                           <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Masa (m)</label>
                           <input
@@ -165,7 +165,7 @@ export default function Parameters(props) {
                           />
                         </div>
                         <div className="flex gap-2">
-                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">C amortiguamiento (B)</label>
+                          <label className="block w-50 text-sm font-medium text-[#f1f1f1]">C. amortiguamiento (B)</label>
                           <input
                             type="text"
                             name="damping"
@@ -239,7 +239,7 @@ export default function Parameters(props) {
                 <div className="w-full space-y-8 flex gap-20">
                   <div className="w-full">
                     <form className="space-y-3 flex flex-col gap-4 items-center" onSubmit={handleSubmitNorm}>
-                      <div className="space-y-3 w-full grid grid-cols-2 gap-4">
+                      <div className="space-y-3 w-full grid grid-cols-2 gap-4 max-sm:grid-cols-1">
                         <div className="flex gap-2">
                           <label className="block w-50 text-sm font-medium text-[#f1f1f1]">Amortiguamiento (β)</label>
                           <input
