@@ -404,7 +404,7 @@ export default function Parameters(props) {
                       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1]">
-                            Masa (m) <span className="text-red-400">*</span>
+                            Masa (m) (kg) <span className="text-red-400">*</span>
                           </label>
                           <input
                             type="number"
@@ -419,7 +419,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1]">
-                            Constante del resorte (k) <span className="text-red-400">*</span>
+                            Constante del resorte (k) (N/m) <span className="text-red-400">*</span>
                           </label>
                           <input
                             type="number"
@@ -434,7 +434,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Coeficiente de amortiguamiento (B)
+                            Coeficiente de amortiguamiento (B) (kg/s)
                             <Info size={14} className="text-gray-400" title="Opcional: dejar vacío para sistema sin amortiguamiento" />
                           </label>
                           <input
@@ -449,7 +449,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Fuerza externa F(t)
+                            Fuerza externa F(t) (N)
                             <button
                               type="button"
                               onClick={() => setShowForceCalculator(!showForceCalculator)}
@@ -470,7 +470,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Posición inicial x(0)
+                            Posición inicial x(0) (m)
                             <Info size={14} className="text-gray-400" title="Opcional: posición inicial del sistema" />
                           </label>
                           <input
@@ -485,7 +485,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Velocidad inicial x'(0)
+                            Velocidad inicial x'(0) (m/s)
                             <Info size={14} className="text-gray-400" title="Opcional: velocidad inicial del sistema" />
                           </label>
                           <input
@@ -564,7 +564,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1]">
-                            Frecuencia natural (ω₀) <span className="text-red-400">*</span>
+                            Frecuencia natural (ω₀) (rad/s) <span className="text-red-400">*</span>
                           </label>
                           <input
                             type="number"
@@ -579,7 +579,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Fuerza externa F(t)
+                            Fuerza externa F(t) (N)
                             <button
                               type="button"
                               onClick={() => setShowForceCalculator(!showForceCalculator)}
@@ -600,7 +600,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Posición inicial x(0)
+                            Posición inicial x(0) (m)
                             <Info size={14} className="text-gray-400" title="Opcional: posición inicial del sistema" />
                           </label>
                           <input
@@ -615,7 +615,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Velocidad inicial x'(0)
+                            Velocidad inicial x'(0) (v)
                             <Info size={14} className="text-gray-400" title="Opcional: velocidad inicial del sistema" />
                           </label>
                           <input
