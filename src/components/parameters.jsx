@@ -615,7 +615,7 @@ export default function Parameters(props) {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="block text-sm font-medium text-[#f1f1f1] flex items-center gap-1">
-                            Velocidad inicial x'(0) (v)
+                            Velocidad inicial x'(0) (m/s)
                             <Info size={14} className="text-gray-400" title="Opcional: velocidad inicial del sistema" />
                           </label>
                           <input
