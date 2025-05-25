@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Calculator, Info, AlertCircle, CheckCircle, X, Copy, Play } from 'lucide-react';
+import { Calculator, Info, AlertCircle, CheckCircle, X, Play } from 'lucide-react';
 
 export default function Parameters(props) {
   const [activeTab, setActiveTab] = useState('FISICOS');
@@ -28,6 +28,44 @@ export default function Parameters(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+
+  // Función para extraer el valor real de un número complejo
+  const getComplexValue = (value) => {
+    if (typeof value === 'object' && value !== null) {
+      if (typeof value.real === 'number') {
+        return value.real;
+      }
+    }
+    return typeof value === 'number' ? value : 0;
+  };
+
+  // Función para procesar datos de la API que puedan tener números complejos
+  const processApiResponse = (data) => {
+    const processed = { ...data };
+    
+    // Procesar system_properties que pueden tener números complejos
+    if (data.system_properties) {
+      const systemProps = { ...data.system_properties };
+      
+      // Campos que pueden ser números complejos
+      const complexFields = ['damped_period', 'logarithmic_decrement'];
+      
+      complexFields.forEach(field => {
+        if (systemProps[field]) {
+          systemProps[field] = getComplexValue(systemProps[field]);
+        }
+      });
+      
+      processed.system_properties = systemProps;
+    }
+    
+    // Procesar force_analysis si tiene números complejos
+    if (data.force_analysis && data.force_analysis.parsed) {
+      processed.force_analysis.parsed = getComplexValue(data.force_analysis.parsed);
+    }
+    
+    return processed;
+  };
 
   // Plantillas de fuerza mejoradas
   const forceTemplates = {
@@ -115,14 +153,13 @@ export default function Parameters(props) {
       // Campos que pueden ser null (vacíos) o cero
       if (['initial_position', 'initial_velocity', 'damping', 'force', 'beta'].includes(key)) {
         if (value === '' || value === 'null') {
-          processed[key] = null;
+          processed[key] = '';
         } else if (value === '0') {
           processed[key] = key === 'force' ? "0" : 0;
         } else {
           processed[key] = key === 'force' ? value : parseFloat(value);
         }
       } else {
-        // Campos requeridos (mass, stiffness, omega_sq)
         if (value === '' || isNaN(parseFloat(value))) {
           throw new Error(`El campo ${key} es requerido y debe ser un número válido`);
         }
@@ -181,6 +218,7 @@ export default function Parameters(props) {
     try {
       const processedData = processFormData(formFisc);
       const validationErrors = validateForm(processedData, true);
+      console.log(processedData)
       
       if (validationErrors.length > 0) {
         throw new Error(validationErrors.join('. '));
@@ -213,9 +251,10 @@ export default function Parameters(props) {
       }
       
       const data = await res.json();
-      setResultData(data);
+      const processedApiData = processApiResponse(data);
+      setResultData(processedApiData);
       setSuccess(true);
-      if (props.onResultData) props.onResultData(data);
+      if (props.onResultData) props.onResultData(processedApiData);
       
     } catch (err) {
       console.error('Error en cálculo:', err);
@@ -265,9 +304,10 @@ export default function Parameters(props) {
       }
       
       const data = await res.json();
-      setResultData(data);
+      const processedApiData = processApiResponse(data);
+      setResultData(processedApiData);
       setSuccess(true);
-      if (props.onResultData) props.onResultData(data);
+      if (props.onResultData) props.onResultData(processedApiData);
       
     } catch (err) {
       console.error('Error en cálculo:', err);
@@ -314,7 +354,6 @@ export default function Parameters(props) {
   };
 
   const currentForce = activeTab === 'FISICOS' ? formFisc.force : formNorm.force;
-  const categories = [...new Set(Object.values(forceTemplates).map(t => t.category))];
 
   return (
     <section className="bg-[#242021] p-6 flex flex-col justify-center gap-10 min-h-screen">
