@@ -4,7 +4,7 @@ export default function Menu() {
         <div className="container mx-auto flex justify-between items-center">
           <a href="/" className="text-[#9b702c] text-2xl max-md:text-xl font-semibold font-['Poppins']">SPRINGMIND</a>
           <div className="space-x-4">
-            <a href="#" className="text-[#9b702c] text-2xl max-md:text-xl hover:text-gray-500 font-['Poppins']">GITHUB</a>
+            <a href="https://github.com/danielxiquin/SpringMind" className="text-[#9b702c] text-2xl max-md:text-xl hover:text-gray-500 font-['Poppins']">GITHUB</a>
           </div>
         </div>
       </nav>
