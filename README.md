@@ -119,14 +119,14 @@ Content-Type: application/json
   }
 }
 ```
-##Frontend
+## Frontend
 Esta API se puede conectar con cualquier cliente HTTP. En este proyecto, se ha integrado con un frontend moderno desarrollado en Astro + React, que permite:
 
 Formulario para ingreso de parámetros físicos o canónicos
 Visualización interactiva de la solución y sus propiedades
 Exportación de resultados en LaTeX
 
-##Dependencias
+## Dependencias
 sympy>=1.12
 numpy>=1.24.0
 fastapi>=0.103.0
