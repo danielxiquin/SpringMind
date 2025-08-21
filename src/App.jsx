@@ -5,7 +5,7 @@ import Parmeters from './components/parameters'
 import ResultsDisplay from './components/results'
 import FinalFooter from './components/final'
 import './App.css'
-
+import { useEffect } from 'react';
 function App() {
 
   useEffect(() => {
