@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 function App() {
 
   useEffect(() => {
-    const projectId = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'; // ← UUID real del proyecto
+    const projectId = '440938cc-c1e6-42e0-baa5-ae8afd7ea5d7'; // ← UUID real del proyecto
     const script = document.createElement('script');
     script.src = 'http://localhost:4321/api/projects/track-secure';
     script.dataset.project = projectId;
