@@ -1,0 +1,6 @@
+projectKey=danielxiquin_SpringMind_5d1ac35a-2d2d-4939-a773-cee7386e06dd
+serverUrl=http://localhost:9000
+serverVersion=25.10.0.114319
+dashboardUrl=http://localhost:9000/dashboard?id=danielxiquin_SpringMind_5d1ac35a-2d2d-4939-a773-cee7386e06dd
+ceTaskId=88724767-0b35-4006-a9f7-531f7b15a185
+ceTaskUrl=http://localhost:9000/api/ce/task?id=88724767-0b35-4006-a9f7-531f7b15a185
